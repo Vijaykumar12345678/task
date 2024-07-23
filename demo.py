@@ -1,40 +1,45 @@
 import random
 import math
 
-def employee_present():
-    print("Employee is Present")
+def main():
+    wage_per_hour = 20
+    full_day = 8
+    half_day = 4
+    daily_wage = 0
+    monthly_wage = 0
+
+    print("===== WELCOME TO EMPLOYEE WAGE COMPUTATION ======")
     print("")
-    print(f"The daily wage of Employee is : {wage_per_hour * full_day * total_no_of_days}")
-    print("")
+    total_no_of_days = int(input("Enter the number of days you were supposed to work (between 1-20): "))
+    total_hours = total_no_of_days * full_day
+    counter = 0
 
-def employee_part_time():
-    print("Employee is Present but working part time")
-    print("")
-    print(f"The daily wage of Employee is : {wage_per_hour * half_day * total_no_of_days}")
-    print("")
+    for i in range(1, total_no_of_days + 1):
+        emp_check = math.floor(random.random() * 10) % 3
+        if emp_check == 0:
+            print(f"Employee is Present on day and is working full time: {i}")
+            daily_wage = wage_per_hour * full_day
+            print(f"The daily wage of Employee is: {daily_wage}")
+            print(" \n ")
+            counter += 1
+        elif emp_check == 1:
+            print(f"Employee is Present but working part time on day: {i}")
+            daily_wage = wage_per_hour * half_day
+            print(f"The daily wage of Employee is: {daily_wage}")
+            print(" \n ")
+        else:
+            print(f"Employee is Absent on day: {i}")
+            daily_wage = 0
+            print(f"The daily wage of Employee is: {daily_wage}")
+            print(" \n ")
 
-def employee_absent():
-    print("Employee is Absent")
-    print("")
-    print("The daily wage of Employee is : 0")
-    print("")
+        monthly_wage += daily_wage
 
-# Mapping the cases to functions
-switch = {
-    0: employee_present,
-    1: employee_part_time,
-    2: employee_absent
-}
+    print("\n")
+    if total_hours >= 100 or counter >= 20:
+        print(f"The monthly wage of employee is: {monthly_wage}")
+    else:
+        print(f"The monthly wage of employee is: {monthly_wage}")
 
-wage_per_hour = 20
-full_day = 8
-half_day = 4
-total_no_of_days = 20
-
-print("===== WELCOME TO EMPLOYEE WAGE COMPUTATION ======")
-print("")
-
-emp_check = math.floor(random.random() * 10) % 3
-
-# Call the corresponding function based on the value of emp_check
-switch.get(emp_check, employee_absent)()
+if __name__ == "__main__":
+    main()
